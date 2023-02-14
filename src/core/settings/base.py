@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     
     # third party
     "rest_framework",
+    "drf_spectacular",
 
     # internal apps
     "apps.products",
@@ -118,3 +119,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# REST FRAMEWORK SETTINGS
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# DJANGO SPECTACULAR SETTINGS
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Ecomerce API',
+    'DESCRIPTION': 'API for MVP Ecomerce',
+    'VERSION': '0.1.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
