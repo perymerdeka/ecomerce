@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: "ecomerce-db"
+    image: postgres:15
+    env_file:
+      - ./.env
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+    - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PWD}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - ecomerce-network
+  web:
+    container_name: "ecomerce-web"
+    build: .
+    working_dir: /app/src
+    command: python manage.py runserver --settings=core.settings.docker ${APP_IP}:${APP_PORT}
+    volumes:
+      - .:/app
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    networks:
+      - ecomerce-ptf
+networks:
+    django-ecommerce:
+        driver: bridge
+volumes:
+  data:
