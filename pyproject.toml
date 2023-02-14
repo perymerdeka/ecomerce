@@ -12,6 +12,8 @@ python = "^3.8"
 django = "^4.1.6"
 djangorestframework = "^3.14.0"
 python-dotenv = "^0.21.1"
+pytest = "^7.2.1"
+pytest-django = "^4.5.2"
 
 
 [build-system]
